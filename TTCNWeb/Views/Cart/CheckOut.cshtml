@@ -1,0 +1,202 @@
+﻿@model IEnumerable<TTCNWeb.Models.CartItem>
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Layout/_LayoutPage.cshtml";
+}
+
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Check out</li>
+            </ol>
+        </div><!--/breadcrums-->
+        <div class="step-one">
+            <h2 class="heading">Tiến Hành Đặt Hàng</h2>
+           
+            <br />
+            <br />
+        </div>
+       
+      
+        @{
+            if (ViewBag.Customer != null)
+            {
+                <div class="checkout-options">
+                    <h3>Tài khoản: @ViewBag.Customer.TaiKhoan</h3>
+                    <p>Tên khách hàng: @ViewBag.Customer.HoTen</p>
+
+
+                </div><!--/checkout-options-->
+            }
+            else
+            {
+                 <!--alert mess-->
+
+                <p>Đăng nhập để dễ dàng đặt hàng: <a href="/KhachHang/Index">Đăng nhập</a></p>
+                <div class="shopper-informations">
+                    <div class="row">
+                        @using (@Html.BeginForm("Create", "KhachHang", FormMethod.Post))
+                        {
+                            <div class="col-sm-3">
+                                <div class="shopper-info">
+                                    <p>Shopper Information</p>
+
+                                    <input name="email" type="email" placeholder="Email" class="form-control">
+                                    <br />
+                                    <input name="taikhoan" type="text" placeholder="Tài Khoản" class="form-control">
+                                    <br />
+                                    <input name="matkhau" type="password" placeholder="Mật khẩu" class="form-control">
+                                    <br />
+                                    <input name="rematkhau" type="password" placeholder="Xác Nhận Mật khẩu" class="form-control">
+
+
+                                </div>
+                            </div>
+                            <div class="col-sm-5 clearfix">
+                                <div class="bill-to">
+                                    <p>Bill To</p>
+                                    <div class="form-one">
+
+                                        <input name="hoten" type="text" placeholder="Họ tên" class="form-control">
+                                        <br />
+                                        <input name="dienthoai" type="text" placeholder="Điện Thoại" class="form-control">
+                                        <br />
+                                        <select name="gioitinh" class="form-control">
+                                            <option>Nam</option>
+                                            <option>Nữ</option>
+                                        </select>
+                                        <br />
+                                        <input name="diachi" type="text" placeholder="Địa Chỉ" class="form-control">
+
+                                        <br />
+                                        <button class="btn btn-primary">Đăng Ký</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+
+
+
+        <div class="review-payment">
+            <h2>Review & Payment</h2>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Item</td>
+                        <td class="description"></td>
+                        <td class="price">Price</td>
+                        <td class="quantity">Quantity</td>
+                        <td class="total">Total</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cart_product">
+                                <a href=""><img src="~/Content/anhbia/@item.Sach.AnhBia" alt=""></a>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">@item.Sach.TenSach</a></h4>
+                                <p>@item.Sach.NhaXuatBan.TenNXB</p>
+                            </td>
+                            <td class="cart_price">
+                                <p>@item.Sach.GiaBan</p>
+                            </td>
+
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    <a class="cart_quantity_up" href="/Cart/UpdateCart?id=@item.Sach.MaSach&value=1"> + </a>
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="@item.SoLuong" autocomplete="off" size="2">
+                                    <a class="cart_quantity_down" href="/Cart/UpdateCart?id=@item.Sach.MaSach&value=-1">- </a>
+                                </div>
+                            </td>
+
+
+                            <td class="cart_total">
+
+                                <p class="cart_total_price">@((item.Sach.GiaBan * item.SoLuong).ToString("N0"))</p>
+                            </td>
+                            <td class="cart_delete">
+                                <a class="cart_quantity_delete" href="/Cart/RemoveLine/@item.Sach.MaSach"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                        <td colspan="2">
+                            <table class="table table-condensed total-result">
+                                <tr>
+                                    <td>Cart Sub Total</td>
+                                    @{
+                                        if (ViewBag.Cart != null)
+                                        {
+                                            <td>@ViewBag.TongTien.ToString("N0")</td>
+                                        }
+                                        else
+                                        {
+                                            <td>0</td>
+                                        }
+                                    }
+                                  
+                                </tr>
+                                <tr>
+                                    <td>Exo Tax</td>
+                                    <td>Free</td>
+                                </tr>
+                                <tr class="shipping-cost">
+                                    <td>Shipping Cost</td>
+                                    <td>Free</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    @{
+                                        if (ViewBag.Cart != null)
+                                        {
+                                            <td>@ViewBag.TongTien.ToString("N0")</td>
+                                        }
+                                        else
+                                        {
+                                            <td>0</td>
+                                        }
+                                    }
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a class="btn btn-default check_out" href="/Cart/Order">Check Out</a>
+
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="payment-options">
+            <span>
+                <label><input type="checkbox"> Direct Bank Transfer</label>
+            </span>
+            <span>
+                <label><input type="checkbox"> Check Payment</label>
+            </span>
+            <span>
+                <label><input type="checkbox"> Paypal</label>
+            </span>
+        </div>
+    </div>
+</section> <!--/#cart_items-->

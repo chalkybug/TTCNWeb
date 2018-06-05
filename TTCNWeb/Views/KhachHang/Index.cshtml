@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Layout/_LayoutPage.cshtml";
+}
+
+<section id="form">
+    <!--form-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="login-form">
+                    <!--login form-->
+                    <h2>Login to your account</h2>
+                    @{
+                        if (!string.IsNullOrEmpty(ViewBag.msg))
+                        {
+                            <script type="text/javascript">alert('@ViewBag.msg');</script>
+                        }
+
+                    }
+                    @using (Html.BeginForm("Login", "KhachHang", FormMethod.Post))
+                    {
+                        <input name="username" type="text" placeholder="Username" />
+                        <input name="password" type="password" placeholder="Password" />
+                        <span>
+                            <input type="checkbox" class="checkbox">
+                            Keep me signed in
+                        </span>
+                        <button type="submit" class="btn btn-default">Login</button>
+                    }
+
+                </div><!--/login form-->
+            </div>
+
+        </div>
+    </div>
+</section><!--/form-->

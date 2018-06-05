@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Notification";
+    Layout = "~/Layout/_AdminPage.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+
+            <h1>Thông Báo</h1>
+
+
+            <h2>Bạn không có quyền truy cập chức năng này</h2>
+
+            <a class="button-control" href="/Admin/Logout">Đăng xuất tài khoản</a>
+            <a class="button-control" href="/Admin/Index">Trở về trang chủ</a>
+        </div>
+
+    </div>
+    <div class="space"> </div>
+
+
+</div>
+<style>
+    h1 {
+        color: red;
+    }
+
+    a:hover {
+        color: red;
+    }
+
+    .space {
+        height: 24em;
+    }
+
+    .button-control {
+        padding: 10px 40px;
+        margin: 50px 50px;
+    }
+</style>
