@@ -1,0 +1,64 @@
+﻿@model BANSACHADMIN.Models.DATA.DonHang
+
+@{
+    ViewBag.Title = "Xoa";
+    Layout = "~/Views/LAYOUT/_LayoutAdmin.cshtml";
+}
+
+
+<h3>BẠN CÓ CHẮC CHẮN MUỐN XÓA KHÔNG?</h3>
+<div>
+  
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayGiao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayGiao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DaThanhToan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaThanhToan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrangGiaoHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrangGiaoHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhachHang.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.HoTen)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xoa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại trang chủ", "DonHang")
+        </div>
+    }
+</div>
