@@ -4,6 +4,22 @@
     Layout = "~/Layout/_LayoutPage.cshtml";
 }
 
+@section contentJs{
+    <script type="text/javascript">
+        $(function () {
+            $('.datetimepicker').datetimepicker({
+                pickTime: false
+            });
+
+        });
+
+
+    </script>
+
+
+
+}
+
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">
@@ -14,18 +30,20 @@
         </div><!--/breadcrums-->
         <div class="step-one">
             <h2 class="heading">Tiến Hành Đặt Hàng</h2>
-           
+
             <br />
             <br />
         </div>
-       
-      
+
+
         @{
             if (ViewBag.Customer != null)
             {
                 <div class="checkout-options">
                     <h3>Tài khoản: @ViewBag.Customer.TaiKhoan</h3>
                     <p>Tên khách hàng: @ViewBag.Customer.HoTen</p>
+                    <p>Điện Thoại: @ViewBag.Customer.DienThoai</p>
+                    <p>Địa Chỉ: @ViewBag.Customer.DiaChi</p>
 
 
                 </div><!--/checkout-options-->
@@ -67,6 +85,15 @@
                                             <option>Nam</option>
                                             <option>Nữ</option>
                                         </select>
+                                        <br />
+                                        <div class="input-append datetimepicker form-control">
+
+                                            <input style="border:none" data-format="yyyy-MM-dd" name="ngaysinh" type="text" placeholder="Ngày sinh">
+                                            <span class="add-on">
+                                                <i class="fa fa-calendar">
+                                                </i>
+                                            </span>
+                                        </div>
                                         <br />
                                         <input name="diachi" type="text" placeholder="Địa Chỉ" class="form-control">
 
@@ -149,7 +176,7 @@
                                             <td>0</td>
                                         }
                                     }
-                                  
+
                                 </tr>
                                 <tr>
                                     <td>Exo Tax</td>

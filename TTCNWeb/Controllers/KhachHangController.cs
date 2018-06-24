@@ -44,6 +44,9 @@ namespace TTCNWeb.Controllers
         {
             KhachHang khach = new KhachHang();
             TryUpdateModel(khach, form);
+            khach.idUserGroup = "CUSTOMER";
+            db.KhachHangs.Add(khach);
+            db.SaveChanges();
             ViewBag.msg = "Tao tai khoan thanh cong. Hay dang nhap !!";
             return View("Index");
 
