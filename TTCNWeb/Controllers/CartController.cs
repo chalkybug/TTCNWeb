@@ -50,7 +50,7 @@ namespace TTCNWeb.Controllers
 
             if (string.IsNullOrEmpty(returnURL))
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Show");
             }
 
             return Redirect(returnURL);

@@ -32,25 +32,116 @@ namespace TTCNWeb.Controllers
         {
 
             Sach sach = db.Saches.Where(x => x.MaSach == id).FirstOrDefault();
+            //var matacgia = db.ThamGias.
+            //    Where(x => x.MaSach == sach.MaSach).
+            //     Where(x => x.ViTri == "1").
+            //    Select(x => x.MaTacGia).FirstOrDefault();
 
+            //var tentacgia = db.TacGias.Where(x => x.MaTacGia == matacgia).FirstOrDefault();
+
+            //ViewBag.tentacgia = tentacgia.TenTacGia;
 
             return View(sach);
         }
 
-        public ActionResult Search(string author)
+        public ActionResult Search(string author, string category, int? maxPrice, int? minPrice)
         {
-            var _author = db.TacGias.Where(x => x.TenTacGia.Contains(author)).FirstOrDefault();
-
-            var listThamgia = db.ThamGias.Where(x => x.MaTacGia == _author.MaTacGia).ToList();
-
-            var books = new List<Sach>();
-            foreach (var item in listThamgia)
+            List<Sach> books = new List<Sach>();
+            var listBooks = books.ToPagedList(1, 50);
+            if (author == "")
             {
-                Sach sach = db.Saches.Where(x => x.MaSach == item.MaSach).FirstOrDefault();
-                books.Add(sach);
-            }
+                try
+                {
 
-            return View("Show", books);
+                    var machude = db.ChuDes.Where(x => x.TenChuDe.Contains(category)).Select(x => x.MaChuDe).FirstOrDefault();
+
+
+                    var dsBook = db.Saches.Where(x => x.MaChuDe == machude).
+                        Where(a => a.GiaBan <= maxPrice).
+                         Where(a => a.GiaBan >= minPrice).
+                         ToList();
+
+
+                    foreach (var item in dsBook)
+                    {
+                        books.Add(item);
+                    }
+                }
+                catch
+                {
+
+
+                }
+                listBooks = books.ToPagedList(1, 50);
+                return View("Show", listBooks);
+
+            }/// end if
+
+            if (category == "")
+            {
+                try
+                {
+
+                    var matacgia = db.TacGias.Where(x => x.TenTacGia.Contains(author)).Select(x => x.MaTacGia).FirstOrDefault();
+
+                    var thamgia = db.ThamGias.Where(x => x.MaTacGia == matacgia).ToList();
+
+
+                    foreach (var item in thamgia)
+                    {
+
+                        var book = db.Saches.Where(x => x.MaSach == item.MaSach).
+                           Where(a => a.GiaBan <= maxPrice).
+                        Where(a => a.GiaBan >= minPrice).
+                        FirstOrDefault();
+
+                        books.Add(book);
+
+                    }
+
+                }
+                catch
+                {
+
+                }
+
+                listBooks = books.ToPagedList(1, 50);
+                return View("Show", listBooks);
+
+            }// end if
+            try
+            {
+
+                var machude = db.ChuDes.Where(x => x.TenChuDe.Contains(category)).Select(x => x.MaChuDe).FirstOrDefault();
+
+
+                var matacgia = db.TacGias.Where(x => x.TenTacGia.Contains(author)).Select(x => x.MaTacGia).FirstOrDefault();
+
+
+                var thamgia = db.ThamGias.Where(x => x.MaTacGia == matacgia).ToList();
+
+
+
+                foreach (var item in thamgia)
+                {
+                    var book = db.Saches.Where(x => x.MaSach == item.MaSach).
+                           Where(a => a.GiaBan <= maxPrice).
+                        Where(a => a.GiaBan >= minPrice).
+                        FirstOrDefault();
+
+                    books.Add(book);
+
+                }
+
+            }
+            catch
+            {
+
+
+            }
+            listBooks = books.ToPagedList(1, 50);
+            return View("Show", listBooks);
+
         }
 
         public ActionResult SearchQuery(string author, string category, int? maxPrice, int? minPrice)
@@ -58,14 +149,6 @@ namespace TTCNWeb.Controllers
             List<Sach> books = new List<Sach>();
             var listBooks = books.ToPagedList(1, 50);
 
-            //if (!maxPrice.HasValue)
-            //{
-            //    maxPrice = 9999999;
-            //}
-            //if (!minPrice.HasValue)
-            //{
-            //    minPrice = 0;
-            //}
             if (author == "")
             {
                 try
@@ -87,10 +170,10 @@ namespace TTCNWeb.Controllers
                         books.Add(item);
                     }
                 }
-                catch 
+                catch
                 {
 
-                    
+
                 }
                 listBooks = books.ToPagedList(1, 50);
                 return View("Show", listBooks);
@@ -123,11 +206,11 @@ namespace TTCNWeb.Controllers
                     }
 
                 }
-                catch 
+                catch
                 {
 
                 }
-               
+
                 listBooks = books.ToPagedList(1, 50);
                 return View("Show", listBooks);
 
@@ -172,7 +255,20 @@ namespace TTCNWeb.Controllers
             return View("Show", listBooks);
         }
 
+        [HttpPost]
+        public ActionResult TimKiem(FormCollection f)
+        {
+            string tensach = f["tensach"].ToString();
+            if (tensach!=null)
+            {
+                var books = db.Saches.Where(x => x.TenSach.Contains(tensach));
 
+                var listBooks = books.OrderBy(x => x.TenSach).ToPagedList(1, 50);
+                return View("Show", listBooks);
+            }
+            return View("Show");
+
+        }
 
     }
 }
