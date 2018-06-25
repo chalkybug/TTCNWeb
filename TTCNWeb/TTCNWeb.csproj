@@ -184,9 +184,16 @@
     <Content Include="Content\anhbia\b.jpg" />
     <Content Include="Content\anhbia\dsadas.jpg" />
     <Content Include="Content\anhbia\nnn.jpg" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="tinymce\changelog.txt" />
+    <Content Include="tinymce\LICENSE.TXT" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +201,11 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ChiTietDonHangController.cs" />
+    <Compile Include="Controllers\QuanLy\QuanLyKhachHangController.cs" />
+    <Compile Include="Controllers\QuanLy\QuanLyNXBController.cs" />
+    <Compile Include="Controllers\QuanLy\QuanLySanPhamController.cs" />
+    <Compile Include="Controllers\QuanLy\QuanLyTacGiaController.cs" />
+    <Compile Include="Controllers\QuanLy\QuanLyĐonHangController.cs" />
     <Compile Include="Controllers\TacGiaController.cs" />
     <Compile Include="Controllers\DonHangController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
@@ -239,6 +251,35 @@
     <Content Include="Views\Admin\Notification.cshtml" />
     <Content Include="Layout\_AdminHeaderBottom.cshtml" />
     <Content Include="Layout\web.config" />
+    <Content Include="Views\LAYOUT\_LayoutAdmin.cshtml" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Views\QuanLyĐonHang\DonHang.cshtml" />
+    <Content Include="Views\QuanLyĐonHang\ChinhSua.cshtml" />
+    <Content Include="Views\QuanLyĐonHang\Xoa.cshtml" />
+    <Content Include="Views\QuanLyĐonHang\HienThi.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\KhachHang.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\KhachHang12.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\ChinhSua.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\Xoa.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\HienThi.cshtml" />
+    <Content Include="Views\QuanLyNXB\NXB.cshtml" />
+    <Content Include="Views\QuanLyNXB\ChinhSua.cshtml" />
+    <Content Include="Views\QuanLyNXB\Xoa.cshtml" />
+    <Content Include="Views\QuanLyNXB\HienThi.cshtml" />
+    <Content Include="Views\QuanLyNXB\ThemMoi.cshtml" />
+    <Content Include="Views\QuanLySanPham\Index.cshtml" />
+    <Content Include="Views\QuanLySanPham\ThemMoi.cshtml" />
+    <Content Include="Views\QuanLySanPham\ChinhSua.cshtml" />
+    <Content Include="Views\QuanLySanPham\HienThi.cshtml" />
+    <Content Include="Views\QuanLySanPham\Xoa.cshtml" />
+    <Content Include="Views\QuanLyTacGia\TacGia.cshtml" />
+    <Content Include="Views\QuanLyTacGia\ChinhSua.cshtml" />
+    <Content Include="Views\QuanLyTacGia\Xoa.cshtml" />
+    <Content Include="Views\QuanLyTacGia\HienThi.cshtml" />
+    <Content Include="Views\QuanLyTacGia\ThemMoi.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -248,9 +289,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\CssAdmin\" />
     <Folder Include="Content\css\" />
+    <Folder Include="Content\font-awesome-4.7.0\" />
     <Folder Include="Content\fonts\" />
     <Folder Include="Content\images\" />
+    <Folder Include="tinymce\js\" />
     <Folder Include="Views\ChiTietDonHang\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\DonHang\" />
